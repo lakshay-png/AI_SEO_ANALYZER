@@ -29,6 +29,7 @@ export async function rankTracker(keyword, targetDomain) {
         let found = null,
             allResults = [];
 
+        // Fetching target domain from the URL
         const cleanTarget = targetDomain.replace("www.", "").toLowerCase();
 
         // 3. Search Loop: Iterate through up to 5 pages of Google results
@@ -96,6 +97,7 @@ export async function rankTracker(keyword, targetDomain) {
 
         // 6. Finalization: Close browser and extract competitors
         await browser.close();
+        // it will remove the own results and give us the results of competitors
         const competitors = allResults.filter((r) => !r.domain.toLowerCase().includes(cleanTarget) && !cleanTarget.includes(r.domain.toLowerCase())).slice(0, 10);
 
         return {
