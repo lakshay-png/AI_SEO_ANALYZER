@@ -8,6 +8,8 @@ export const addKeyword = async (req, res) => {
 
         if (!keyword || !url) return res.status(400).json({ success: false, message: "Keyword and URL are required" });
 
+
+        // if url and keyword both are present then we extract domain from url
         // Extract domain from URL
         let domain;
         try {
@@ -42,7 +44,7 @@ export const addKeyword = async (req, res) => {
     }
 };
 
-// Get all tracked keywords for user
+// Get all keywords for user
 export const getKeywords = async (req, res) => {
     try {
         const keywords = await KeywordTracking.find({ userId: req.userId }).sort({ createdAt: -1 }).select("-rankHistory");
