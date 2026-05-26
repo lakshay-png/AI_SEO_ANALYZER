@@ -18,6 +18,7 @@ export async function rankTracker(keyword, targetDomain) {
         // 2. Initial Google Visit & Consent Handling
         await page.goto("https://www.google.com", { waitUntil: "networkidle" });
         try {
+            // if there is a consent pop then it will handel it
             const btn = await page.$('button[id="L2AGLb"], form[action*="consent"] button');
             if (btn) {
                 await btn.click();
